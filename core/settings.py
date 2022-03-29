@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'database',
     'api',
     'account',
@@ -136,3 +139,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend']
 AUTH_USER_MODEL = 'database.UserDatas'
+
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD='username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_USER_MODEL_USERNAME_FIELD='usernameAccount'
+ACCOUNT_UNIQUE_EMAIL =True
+ACCOUNT_USER_MODEL_EMAIL_FIELD='emailAccount'
+ACCOUNT_USER_MODEL_USERNAME_FIELD='usernameAccount'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1'
+
+
+

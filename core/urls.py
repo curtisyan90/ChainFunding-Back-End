@@ -15,6 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+from allauth.account.views import confirm_email
+from django.urls import path, include
+
+
 
 from rest_framework.routers import DefaultRouter
 
@@ -24,14 +29,12 @@ router = DefaultRouter()
 # account
 router.register('account', AccountViewSet)
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('accounta/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('accounta/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^account/', include('allauth.urls')),
+    url(r'^accounts-rest/registration/account-confirm-email/(?P<key>.+)/$', confirm_email, name='account_confirm_email'),
 ]
