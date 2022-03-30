@@ -1,8 +1,10 @@
 from django.db import models
+
+# Create your models here.
+
 from django.contrib.auth.models import (
     AbstractBaseUser
 )
-from account.usermanager import CustomUserManager
 
 class UserDatas(AbstractBaseUser):
     usernameAccount = models.CharField(
@@ -20,7 +22,7 @@ class UserDatas(AbstractBaseUser):
     USERNAME_FIELD = 'usernameAccount'
     REQUIRED_FIELD = ['emailAccount']
 
-    objects = CustomUserManager()
+
 
     class Meta:
         db_table = 'user_datas'

@@ -1,7 +1,7 @@
-"""core URL Configuration
+"""mycore URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,26 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
-from allauth.account.views import confirm_email
-from django.urls import path, include
-
-
 
 from rest_framework.routers import DefaultRouter
 
-from account.views import AccountViewSet #account
+from myaccounts.views import AccountViewSet #account
 
 router = DefaultRouter()
 # account
-router.register('account', AccountViewSet)
-
+router.register('myaccounts', AccountViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('myapis/', include(router.urls)),
     path('admin/', admin.site.urls),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^account/', include('allauth.urls')),
-    url(r'^accounts-rest/registration/account-confirm-email/(?P<key>.+)/$', confirm_email, name='account_confirm_email'),
 ]
