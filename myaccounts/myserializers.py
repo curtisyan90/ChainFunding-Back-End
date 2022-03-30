@@ -5,3 +5,8 @@ class AccountSerializer(ModelSerializer):
     class Meta:
         model=UserDatas
         fields = '__all__'
+
+class UserSeeSerializer(ModelSerializer):
+    class Meta:
+        model=UserDatas
+        fields = ['usernameAccount', 'emailAccount', 'emailAuth', 'walletAddress', 'evaluation']

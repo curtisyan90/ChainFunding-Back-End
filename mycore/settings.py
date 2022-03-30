@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
     'myaccounts',
     'mydatabases',
     'myapis',
@@ -81,7 +87,7 @@ WSGI_APPLICATION = 'mycore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql', # postgresql
-        'NAME': 'chainfundin2', # database name
+        'NAME': 'c888', # database name
         'USER': 'cfuser', # username
         'PASSWORD': 'ab12374453', # passwd
         'HOST': 'localhost', # host
@@ -132,3 +138,37 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'mydatabases.UserDatas'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    'allauth.account.auth_backends.AuthenticationBackend',
+    )
+
+ACCOUNT_AUTHENTICATION_METHOD='username_email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD='usernameAccount'
+ACCOUNT_USER_MODEL_EMAIL_FIELD='emailAccount'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+SITE_ID = 1
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'myaccounts.myserializers.UserSeeSerializer',
+}
+
+# SMTP Configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.gandi.net'  
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = '*'  
+EMAIL_HOST_PASSWORD = '*'  
+DEFAULT_FROM_EMAIL = '*'
+
+
+
+

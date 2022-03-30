@@ -6,6 +6,8 @@ from django.contrib.auth.models import (
     AbstractBaseUser
 )
 
+from myaccounts.myusermanagers import CustomUserManager
+
 class UserDatas(AbstractBaseUser):
     usernameAccount = models.CharField(
         max_length=128,
@@ -17,10 +19,14 @@ class UserDatas(AbstractBaseUser):
     )
     emailAuth = models.BooleanField(blank=True,default=False)
     walletAddress = models.CharField(blank=True,max_length=36)
-    evaluation = models.PositiveIntegerField(blank=True) #null=True
+    evaluation = models.PositiveIntegerField(null = True) #null=True
 
     USERNAME_FIELD = 'usernameAccount'
-    REQUIRED_FIELD = ['emailAccount']
+    EMAIL_FIELD = 'emailAccount'
+    REQUIRED_FIELD = []
+
+    objects = CustomUserManager()
+
 
 
 
